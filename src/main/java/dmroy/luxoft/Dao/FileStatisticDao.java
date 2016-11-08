@@ -82,7 +82,6 @@ public class FileStatisticDao implements FileStatisticDaoInterface{
                                 new Object[] { fileName},
                                 new int[]{Types.VARCHAR});
         }
-        Long fileId = new Date().getTime();
         String SQL_QUERY = "INSERT INTO file_statistic (               "
                                                    + "  FILE_ID,       "
                                                    + "  FILE_NAME,     "
