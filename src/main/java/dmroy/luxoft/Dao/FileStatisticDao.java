@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Types;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -81,8 +82,9 @@ public class FileStatisticDao implements FileStatisticDaoInterface{
                                 new Object[] { fileName},
                                 new int[]{Types.VARCHAR});
         }
-        
+        Long fileId = new Date().getTime();
         String SQL_QUERY = "INSERT INTO file_statistic (               "
+                                                   + "  FILE_ID,       "
                                                    + "  FILE_NAME,     "
                                                    + "  LINE_NUMBER,   "
                                                    + "  MIN_WORD,      "
@@ -93,14 +95,14 @@ public class FileStatisticDao implements FileStatisticDaoInterface{
                                                    + "  ALL_WORD_LEN,  "
                                                    + "  WORDS_CNT      "
                                                    + " )               "
-                          + "VALUES (?,?,?,?,?,?,?,?,?)";
+                          + "VALUES (?,?,?,?,?,?,?,?,?,?)";
         for(Line line:lineList){
             try{
                 jdbcTemplate.update(SQL_QUERY,
-                                   new Object[] {line.getFileName(), line.getLineNumber(), line.getMinWord(),
+                                   new Object[] {line.getFileId(), line.getFileName(), line.getLineNumber(), line.getMinWord(),
                                    line.getMaxWord(), line.getMinWordLength(), line.getMaxWordLength(),
                                    line.getAverageWordLength(), line.getAllWordsLength(), line.getWordsCount()},
-                                   new int[]{Types.VARCHAR, Types.INTEGER, Types.VARCHAR,
+                                   new int[]{Types.BIGINT, Types.VARCHAR, Types.INTEGER, Types.VARCHAR,
                                              Types.VARCHAR, Types.INTEGER, Types.INTEGER,
                                              Types.INTEGER, Types.BIGINT, Types.INTEGER});  
 //                Logger.getLogger(FileStatisticDao.class.getName()).log(Level.INFO, "Файл {0}, трока № {1} добавлена в базу данных.", new Object[]{line.getFileName(), line.getLineNumber()});
