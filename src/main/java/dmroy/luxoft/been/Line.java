@@ -5,8 +5,6 @@
  */
 package dmroy.luxoft.been;
 
-import java.util.Objects;
-
 /**
  *
  * @author dmitriyroy
