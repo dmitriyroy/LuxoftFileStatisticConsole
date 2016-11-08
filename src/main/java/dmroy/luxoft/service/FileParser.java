@@ -91,6 +91,8 @@ public class FileParser implements FileParserInterface{
                 new InputStreamReader(
                         new FileInputStream(file) , "cp1251"/*StandardCharsets.UTF_8*/ ))) {
             String fileLline;
+            // ID файла, для ключа в базе
+            Long fileId = new Date().getTime();
             while ((fileLline = reader.readLine()) != null) {
                 lineNumber++;
                 int lineLength = fileLline.length();
@@ -136,9 +138,8 @@ public class FileParser implements FileParserInterface{
                     }
                     int averageWordLength = 0;
                     averageWordLength = (int)wordsLength/wordSet.size();
-                    
                     Line line = new Line();
-                    line.setFileId(new Date().getTime());
+                    line.setFileId(fileId);
                     line.setFileName(file.getAbsolutePath());
                     line.setLineNumber(lineNumber);
                     line.setMinWord(minWord);
