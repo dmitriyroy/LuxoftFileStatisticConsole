@@ -55,43 +55,61 @@ public class StartPanel extends JPanel{
         addFile.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae) {
-                System.out.println("Кнопка ФАЙЛ");
                 FileParser fileParser = new FileParser();
-//                if(args.length > 0){
-//                    fileParser = new FileParser(new File(args[0]));
-//                }else{
-//                    fileParser = new FileParser();
-//                }
+
                 List<Line> lineList = fileParser.parseFile();
-                Set<String> globalWordSet = fileParser.getGlobalWordSet();
-                int globalMinWordLength = fileParser.getGlobalMinWordLength();
-                int globalMaxWordLength = fileParser.getGlobalMaxWordLength();
-                String globalMinWord = fileParser.getGlobalMinWord();
-                String globalMaxWord = fileParser.getGlobalMaxWord();
-                int lineNumber = fileParser.getLineNumber();
 
                 FileStatisticDao statistic = new FileStatisticDao();
-                statistic.writeIntoFile(lineList);
-//                if(args.length > 1){
-//                    statistic.writeIntoFile(lineList, args[1]);
-//                }else{
-//                    statistic.writeIntoFile(lineList);
-//                }
+                Object[] options = {"Да","Нет"};
+                int n = JOptionPane.showOptionDialog(null,
+                                                    "Соранять лог в файл?",
+                                                    "Требуется Ваш выбор",
+                                                    JOptionPane.YES_NO_OPTION,
+                                                    JOptionPane.QUESTION_MESSAGE,
+                                                    null,     //do not use a custom Icon
+                                                    options,  //the titles of buttons
+                                                    options[0]); //default button title
+                if(n == 0){
+                    statistic.writeIntoFile(lineList);
+                }
+
                 statistic.writeIntoDB(lineList);
 
-                System.out.println("rows = " + lineNumber
-                                + "; globalWordsCount = " + globalWordSet.size()
-                                + "; globalMinWord = " + globalMinWord
-                                + "; globalMinWordLength = " + globalMinWordLength
-                                + "; globalMaxWord = " + globalMaxWord
-                                + "; globalMaxWordLength = " + globalMaxWordLength);
+                // вывод статистики в консоль
+//                Set<String> globalWordSet = fileParser.getGlobalWordSet();
+//                int globalMinWordLength = fileParser.getGlobalMinWordLength();
+//                int globalMaxWordLength = fileParser.getGlobalMaxWordLength();
+//                String globalMinWord = fileParser.getGlobalMinWord();
+//                String globalMaxWord = fileParser.getGlobalMaxWord();
+//                int lineNumber = fileParser.getLineNumber();
+//                System.out.println("rows = " + lineNumber
+//                                + "; globalWordsCount = " + globalWordSet.size()
+//                                + "; globalMinWord = " + globalMinWord
+//                                + "; globalMinWordLength = " + globalMinWordLength
+//                                + "; globalMaxWord = " + globalMaxWord
+//                                + "; globalMaxWordLength = " + globalMaxWordLength);
             }
         });
         addFolder.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae) {
-                System.out.println("Кнопка КАТАЛОГ");
-
+//                System.out.println("Кнопка КАТАЛОГ");
+                Object[] options = {"Да","Нет"};
+                int n = JOptionPane.showOptionDialog(null,
+                                                    "Обрабатывать вложенные каталоги?",
+                                                    "Требуется Ваш выбор",
+                                                    JOptionPane.YES_NO_OPTION,
+                                                    JOptionPane.QUESTION_MESSAGE,
+                                                    null,     //do not use a custom Icon
+                                                    options,  //the titles of buttons
+                                                    options[0]); //default button title
+                switch(n){
+                    case 0:
+                        System.out.println("Выбрали ДА");
+                        break;
+                    default:
+                        System.out.println("Выбрали НЕТ");
+                }
             }
         });
         // КОНЕЦ - СОБЫТИЯ
