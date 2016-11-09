@@ -8,14 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
-//import java.util.ArrayList;
 import java.util.Set;
 import javax.swing.*;
 import javax.swing.text.*;
-//import static konditer.client.Main.COLOR_BLUE;
-//import static konditer.client.Main.COLOR_GREEN;
-//import static konditer.client.Main.COLOR_RED;
-//import konditer.client.util.ChangePanel;
 
 public class StartPanel extends JPanel{
     // панели
