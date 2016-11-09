@@ -60,7 +60,7 @@ public class StartPanel extends JPanel{
                 List<Line> lineList = fileParser.parseFile();
 
                 FileStatisticDao statistic = new FileStatisticDao();
-                Object[] options = {"Да","Нет"};
+                Object[] options = {"Нет","Да"};
                 int n = JOptionPane.showOptionDialog(null,
                                                     "Соранять лог в файл?",
                                                     "Требуется Ваш выбор",
@@ -68,8 +68,8 @@ public class StartPanel extends JPanel{
                                                     JOptionPane.QUESTION_MESSAGE,
                                                     null,     //do not use a custom Icon
                                                     options,  //the titles of buttons
-                                                    options[0]); //default button title
-                if(n == 0){
+                                                    options[1]); //default button title
+                if(n == 1){
                     statistic.writeIntoFile(lineList);
                 }
 
@@ -93,7 +93,7 @@ public class StartPanel extends JPanel{
         addFolder.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae) {
-                Object[] options = {"Да","Нет"};
+                Object[] options = {"Нет","Да"};
                 int n = JOptionPane.showOptionDialog(null,
                                                     "Обрабатывать вложенные каталоги?",
                                                     "Требуется Ваш выбор",
@@ -101,13 +101,13 @@ public class StartPanel extends JPanel{
                                                     JOptionPane.QUESTION_MESSAGE,
                                                     null,     //do not use a custom Icon
                                                     options,  //the titles of buttons
-                                                    options[0]); //default button title
+                                                    options[1]); //default button title
                 switch(n){
                     case 0:
-                        System.out.println("Выбрали ДА");
+                        System.out.println("Выбрали НЕТ");
                         break;
                     default:
-                        System.out.println("Выбрали НЕТ");
+                        System.out.println("Выбрали ДА");
                 }
             }
         });
