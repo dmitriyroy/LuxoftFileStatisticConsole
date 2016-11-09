@@ -20,16 +20,13 @@ public class MainFrame extends JFrame{
     public static Container mainContainer = null;
 //    public static JMenuBar menu = null;
     public static JPanel startPanel = null;
-    //public JPanel currentOrdersPanel = null;
-
-//    public static JTable allCakesTable;
 
     public MainFrame() throws BadLocationException, SQLException{
         // устанавливаем русскую раскладку в приложении
         Locale loc = new Locale("ru","RU");
         setLocale(loc);
         getInputContext().selectInputMethod(loc);
-        // раъзмещаем окно на полэкрана
+        // размещаем окно на полэкрана
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
         FRAME_WIDTH = screenSize.width/2 - 100 ;
@@ -41,20 +38,9 @@ public class MainFrame extends JFrame{
        // НАЧАЛО - меню программы
 //        menu = new MainMenu().getMenu();
         startPanel = new StartPanel().getPanel();
-        //currentOrdersPanel = new CurrentOrdersPanel().getPanel();
-        //currentOrdersPanel.setVisible(true);
 
-        /* .....добавляем все панели сюда...  */
-
-        // КОНЕЦ - центральная панель программы
-
-        // НАЧАЛО - центральный фрейм программы
         mainContainer = getContentPane();
         mainContainer.setLayout(new BorderLayout());
-        //ImageIcon appIcon = new ImageIcon(MainFrame.class.getResource("../image/favicon.png").toString().substring(6));
-        //ImageIcon appIcon = new ImageIcon(MainFrame.class.getResource("src/konditer/client/image/favicon.png").toString().substring(6));
-//        ImageIcon appIcon = new ImageIcon("src/konditer/client/image/favicon.png");
-//        setIconImage(appIcon.getImage());
         setTitle("Сбор статистики файлов.");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(FRAME_WIDTH,FRAME_HEIGHT);

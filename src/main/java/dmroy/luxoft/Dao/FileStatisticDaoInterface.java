@@ -9,8 +9,8 @@ import java.util.List;
  * @author dmitriyroy
  */
 public interface FileStatisticDaoInterface {
-    public void writeIntoFile(List<Line> lineList);
-    public void writeIntoFile(List<Line> lineList,File outFile);
-    public void writeIntoFile(List<Line> lineList,String outFileName);
+    public void writeIntoFile(List<Line> lineList,String inFile);
+    public void writeIntoFile(List<Line> lineList,String inFile,File outFile);
+    public void writeIntoFile(List<Line> lineList,String inFile,String outFileName);
     public void writeIntoDB(List<Line> lineList);
 }

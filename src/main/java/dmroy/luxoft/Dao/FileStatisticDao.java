@@ -10,6 +10,7 @@ import java.sql.Types;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -33,17 +34,31 @@ public class FileStatisticDao implements FileStatisticDaoInterface{
     }
 
     @Override
-    public void writeIntoFile(List<Line> lineList) {
-        writeIntoFile(lineList, FileUtils.getFile("Введите название файл для вывода результата."));
+    public void writeIntoFile(List<Line> lineList, String inFile) {
+        boolean goodFile = true;
+        do{
+            File file = FileUtils.getFile("Введите название файл для вывода результата.");
+            if(!file.getAbsolutePath().equals(inFile)){
+                writeIntoFile(lineList,inFile, file);
+                goodFile = false;
+            }else{
+                JOptionPane.showMessageDialog(null,
+                                            "Нельзя вывести лог в самого себя.",
+                                            "Внимание!",
+                                            JOptionPane.WARNING_MESSAGE);
+            }
+        }while(goodFile);
     }
 
     @Override
-    public void writeIntoFile(List<Line> lineList, String outFileName) {
-        writeIntoFile(lineList, new File(outFileName));
+    public void writeIntoFile(List<Line> lineList, String inFile, String outFileName) {
+        if(!outFileName.equals(inFile)){
+            writeIntoFile(lineList, inFile, new File(outFileName));
+        }
     }
 
     @Override
-    public void writeIntoFile(List<Line> lineList,File outFile) {
+    public void writeIntoFile(List<Line> lineList,String inFile ,File outFile) {
         try {
             FileOutputStream os = new FileOutputStream(outFile);
             os.write("\n".getBytes());

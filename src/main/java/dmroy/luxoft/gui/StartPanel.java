@@ -73,7 +73,9 @@ public class StartPanel extends JPanel{
                                                     options,  //the titles of buttons
                                                     options[0]); //default button title
                 if(n == 1){
-                    statistic.writeIntoFile(lineList);
+                    if(lineList.size()>0){
+                        statistic.writeIntoFile(lineList,lineList.get(0).getFileName());
+                    }
                 }
 
                 statistic.writeIntoDB(lineList);
@@ -97,7 +99,6 @@ public class StartPanel extends JPanel{
             
             @Override
             public void actionPerformed(ActionEvent ae) {
-                FileParser fileParser = new FileParser();
                 Object[] options = {"Нет","Да"};
                 int n = JOptionPane.showOptionDialog(null,
                                                     "Обрабатывать вложенные каталоги?",
@@ -109,9 +110,10 @@ public class StartPanel extends JPanel{
                                                     options[0]); //default button title
                 switch(n){
                     case 0:
-                        System.out.println("Выбрали НЕТ");
+//                        System.out.println("Выбрали НЕТ");
                         JFileChooser folderChooserNo = new JFileChooser();   
                         //file.setCurrentDirectory(new File("."));  // установка директории старта по умолчанию
+                        folderChooserNo.setCurrentDirectory(new File("D:/"));  // установка директории старта по умолчанию
 //                        folderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);                             
                         folderChooserNo.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);                             
                         folderChooserNo.showOpenDialog(null);
@@ -119,26 +121,63 @@ public class StartPanel extends JPanel{
                         File[] fileArr = chooseCDirectoryNo.listFiles();
                         for(File f:fileArr){
                             if(f.isFile()){
-                                FileStatisticDao statistic = new FileStatisticDao();
-                                statistic.writeIntoDB(fileParser.parseFile());
+                                System.out.println("Запустили поток: " + f.getAbsolutePath());
+                                Thread myThready = new Thread(new Runnable(){
+                                    @Override
+                                    public void run(){  //Этот метод будет выполняться в побочном потоке
+                                        FileStatisticDao statistic = new FileStatisticDao();
+                                        FileParser fileParser = new FileParser(f);
+                                        statistic.writeIntoDB(fileParser.parseFile());
+                                    }
+                                });
+                                // Запуск потока
+                                myThready.start();
+                                    //                                myThready.join();
+                                try {
+                                    // Сделаем паузу, иначе получается, что у файлов одинаковое время создания
+                                    // а это время в ключе в базе
+                                    Thread.sleep(10L);
+                                } catch (InterruptedException ex) {
+                                    Logger.getLogger(StartPanel.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                             }
                         }
 //                        File chooseCDirectory = folderChooser.getCurrentDirectory();
                         break;
+                        
                     default:
-                        System.out.println("Выбрали ДА");
+//                        System.out.println("Выбрали ДА");
                         JFileChooser folderChooserYes = new JFileChooser();   
-                        //file.setCurrentDirectory(new File("."));  // установка директории старта по умолчанию
+//                        folderChooserYes.setCurrentDirectory(new File("."));  // установка директории старта по умолчанию
+                        folderChooserYes.setCurrentDirectory(new File("D:/"));  // установка директории старта по умолчанию
 //                        folderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);                             
                         folderChooserYes.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);                             
                         folderChooserYes.showOpenDialog(null);
                         File chooseCDirectoryYes = folderChooserYes.getSelectedFile();
-                        String folderPath = chooseCDirectoryYes.getAbsolutePath();
+//                        String folderPath = chooseCDirectoryYes.getAbsolutePath();
 //                        System.out.println("dirPath = " + folderPath);
                         try {
                             List<String> fileList = showFilesAndDirectoryes(chooseCDirectoryYes);
-                            for(String file:fileList){
-                                
+                            for(String file:fileList){          
+                                System.out.println("Запустили поток: " + file);
+                                Thread myThready = new Thread(new Runnable(){
+                                    @Override
+                                    public void run(){  //Этот метод будет выполняться в побочном потоке
+                                        FileStatisticDao statistic = new FileStatisticDao();
+                                        FileParser fileParser = new FileParser(new File(file));
+                                        statistic.writeIntoDB(fileParser.parseFile());
+                                    }
+                                });
+                                // Запуск потока
+                                myThready.start();
+                                    //                                myThready.join();
+                                try {
+                                    // Сделаем паузу, иначе получается, что у файлов одинаковое время создания
+                                    // а это время в ключе в базе
+                                    Thread.sleep(10L);
+                                } catch (InterruptedException ex) {
+                                    Logger.getLogger(StartPanel.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                             }
                         } catch (Exception ex) {
                             Logger.getLogger(StartPanel.class.getName()).log(Level.SEVERE, null, ex);

@@ -14,6 +14,7 @@ public class FileUtils {
         JFileChooser fileChooser = new JFileChooser(); 
         fileChooser.setDialogTitle(dialogName);
 //        fileChooser.setCurrentDirectory(new File("."));  // установка директории старта по умолчанию
+        fileChooser.setCurrentDirectory(new File("D:/"));  // установка директории старта по умолчанию
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);                             
         fileChooser.showOpenDialog(null);
         
