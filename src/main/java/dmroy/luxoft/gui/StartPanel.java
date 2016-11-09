@@ -62,13 +62,13 @@ public class StartPanel extends JPanel{
                 FileStatisticDao statistic = new FileStatisticDao();
                 Object[] options = {"Нет","Да"};
                 int n = JOptionPane.showOptionDialog(null,
-                                                    "Соранять лог в файл?",
+                                                    "Сохранять лог в файл?",
                                                     "Требуется Ваш выбор",
                                                     JOptionPane.YES_NO_OPTION,
                                                     JOptionPane.QUESTION_MESSAGE,
                                                     null,     //do not use a custom Icon
                                                     options,  //the titles of buttons
-                                                    options[1]); //default button title
+                                                    options[0]); //default button title
                 if(n == 1){
                     statistic.writeIntoFile(lineList);
                 }
@@ -101,7 +101,7 @@ public class StartPanel extends JPanel{
                                                     JOptionPane.QUESTION_MESSAGE,
                                                     null,     //do not use a custom Icon
                                                     options,  //the titles of buttons
-                                                    options[1]); //default button title
+                                                    options[0]); //default button title
                 switch(n){
                     case 0:
                         System.out.println("Выбрали НЕТ");
