@@ -31,15 +31,18 @@ public class FileParser implements FileParserInterface{
     private int lineNumber = 0;
 
     public FileParser() {
+//        System.out.println("FileParser()");
         this.file = FileUtils.getFile("Выберите файл для разбора статистики");
     }
 
     public FileParser(File file) {
+//        System.out.println("FileParser(File file)");
         this.file = file;
     }
 
     @Override
     public List<Line> parseFile() {
+        System.out.println("parseFile()");
         List<Line> outList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(

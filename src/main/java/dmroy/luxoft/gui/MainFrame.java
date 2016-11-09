@@ -4,10 +4,8 @@ import java.awt.*;
 import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.Locale;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
-import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.text.BadLocationException;
 
@@ -34,15 +32,13 @@ public class MainFrame extends JFrame{
         // раъзмещаем окно на полэкрана
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Rectangle rect = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-        FRAME_WIDTH = screenSize.width/2;
-        FRAME_HEIGHT = (int)(rect.getBounds().getHeight() - getSize().getHeight()/* -250 */)/2;
+        FRAME_WIDTH = screenSize.width/2 - 100 ;
+        FRAME_HEIGHT = (int)(rect.getBounds().getHeight() - getSize().getHeight())/2 - 200 ;
         LOCATION_X = FRAME_WIDTH / 2;
         LOCATION_Y = FRAME_HEIGHT / 2;
         ////////////////////////////
 
-//        allCakesTable = CakesPanel.getTable(new String [] { "№","Название", "Дата готовности", "грн/кг", "Вес", "Стоимость", "Начинка","Категория","Заказчик", "Фото торта" } , cakeDao.getAllCakes());
-
-        // НАЧАЛО - меню программы
+       // НАЧАЛО - меню программы
 //        menu = new MainMenu().getMenu();
         startPanel = new StartPanel().getPanel();
         //currentOrdersPanel = new CurrentOrdersPanel().getPanel();

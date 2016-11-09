@@ -6,9 +6,12 @@ import dmroy.luxoft.service.FileParser;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.text.*;
 
@@ -25,8 +28,9 @@ public class StartPanel extends JPanel{
     private final int COLOR_RED = 20;//230;//137;//145
     private final int COLOR_GREEN = 35;//235;//197;//177
     private final int COLOR_BLUE = 73;//249;//197;//202
-
+    
     public StartPanel() throws BadLocationException, SQLException{
+        
         mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setBackground(new Color(COLOR_RED,COLOR_GREEN,COLOR_BLUE));
 
@@ -56,7 +60,6 @@ public class StartPanel extends JPanel{
             @Override
             public void actionPerformed(ActionEvent ae) {
                 FileParser fileParser = new FileParser();
-
                 List<Line> lineList = fileParser.parseFile();
 
                 FileStatisticDao statistic = new FileStatisticDao();
@@ -91,8 +94,10 @@ public class StartPanel extends JPanel{
             }
         });
         addFolder.addActionListener(new ActionListener(){
+            
             @Override
             public void actionPerformed(ActionEvent ae) {
+                FileParser fileParser = new FileParser();
                 Object[] options = {"Нет","Да"};
                 int n = JOptionPane.showOptionDialog(null,
                                                     "Обрабатывать вложенные каталоги?",
@@ -105,9 +110,39 @@ public class StartPanel extends JPanel{
                 switch(n){
                     case 0:
                         System.out.println("Выбрали НЕТ");
+                        JFileChooser folderChooserNo = new JFileChooser();   
+                        //file.setCurrentDirectory(new File("."));  // установка директории старта по умолчанию
+//                        folderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);                             
+                        folderChooserNo.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);                             
+                        folderChooserNo.showOpenDialog(null);
+                        File chooseCDirectoryNo = folderChooserNo.getSelectedFile();
+                        File[] fileArr = chooseCDirectoryNo.listFiles();
+                        for(File f:fileArr){
+                            if(f.isFile()){
+                                FileStatisticDao statistic = new FileStatisticDao();
+                                statistic.writeIntoDB(fileParser.parseFile());
+                            }
+                        }
+//                        File chooseCDirectory = folderChooser.getCurrentDirectory();
                         break;
                     default:
                         System.out.println("Выбрали ДА");
+                        JFileChooser folderChooserYes = new JFileChooser();   
+                        //file.setCurrentDirectory(new File("."));  // установка директории старта по умолчанию
+//                        folderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);                             
+                        folderChooserYes.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);                             
+                        folderChooserYes.showOpenDialog(null);
+                        File chooseCDirectoryYes = folderChooserYes.getSelectedFile();
+                        String folderPath = chooseCDirectoryYes.getAbsolutePath();
+//                        System.out.println("dirPath = " + folderPath);
+                        try {
+                            List<String> fileList = showFilesAndDirectoryes(chooseCDirectoryYes);
+                            for(String file:fileList){
+                                
+                            }
+                        } catch (Exception ex) {
+                            Logger.getLogger(StartPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                 }
             }
         });
@@ -116,5 +151,30 @@ public class StartPanel extends JPanel{
 
     public JPanel getPanel(){
         return mainPanel;
+    }
+    
+    public static List<String> showFilesAndDirectoryes (File f) throws Exception  {
+        List<String> outList = new ArrayList<>();
+        if (!f.isDirectory ()) {
+            outList.add(f.getCanonicalPath());
+//            System.out.println (f.getCanonicalPath());
+        }
+        
+        if (f.isDirectory ()) { 
+            try {
+                File[] child = f.listFiles();
+                
+                for (int i = 0; i < child.length; i++) {
+//                    System.out.println(child[i].getParent());  
+                    outList.addAll(showFilesAndDirectoryes (child[i]));     
+                }
+         
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        
+        return outList;
     }
 }

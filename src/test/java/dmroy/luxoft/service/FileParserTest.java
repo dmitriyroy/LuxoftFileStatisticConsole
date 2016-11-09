@@ -48,6 +48,7 @@ public class FileParserTest {
      * Test of parseFile method, of class FileParser.
      */
     @Test
+    @Ignore
     public void testParseFile() {
         System.out.println("parseFile");
         FileParser instance = new FileParser(new File("D:/!!!_tmp/Books/test_words.txt"));
@@ -62,6 +63,7 @@ public class FileParserTest {
      * Test of getGlobalWordSet method, of class FileParser.
      */
     @Test
+    @Ignore
     public void testGetGlobalWordSet() {
         System.out.println("getGlobalWordSet");
         FileParser instance = new FileParser(new File("D:/!!!_tmp/Books/test_words.txt"));
@@ -85,6 +87,7 @@ public class FileParserTest {
      * Test of setGlobalWordSet method, of class FileParser.
      */
     @Test
+    @Ignore
     public void testSetGlobalWordSet() {
         System.out.println("setGlobalWordSet");
         Set<String> globalWordSet = null;
@@ -98,6 +101,7 @@ public class FileParserTest {
      * Test of getGlobalMinWordLength method, of class FileParser.
      */
     @Test
+    @Ignore
     public void testGetGlobalMinWordLength() {
         System.out.println("getGlobalMinWordLength");
         FileParser instance = new FileParser(new File("D:/!!!_tmp/Books/test_words.txt"));
@@ -126,6 +130,7 @@ public class FileParserTest {
      * Test of getGlobalMaxWordLength method, of class FileParser.
      */
     @Test
+    @Ignore
     public void testGetGlobalMaxWordLength() {
         System.out.println("getGlobalMaxWordLength");
         FileParser instance = new FileParser(new File("D:/!!!_tmp/Books/test_words.txt"));
@@ -157,6 +162,7 @@ public class FileParserTest {
      * Test of getGlobalMinWord method, of class FileParser.
      */
     @Test
+    @Ignore
     public void testGetGlobalMinWord() {
         System.out.println("getGlobalMinWord");
         FileParser instance = new FileParser(new File("D:/!!!_tmp/Books/test_words.txt"));
@@ -185,6 +191,7 @@ public class FileParserTest {
      * Test of getGlobalMaxWord method, of class FileParser.
      */
     @Test
+    @Ignore
     public void testGetGlobalMaxWord() {
         System.out.println("getGlobalMaxWord");
         FileParser instance = new FileParser(new File("D:/!!!_tmp/Books/test_words.txt"));
@@ -213,6 +220,7 @@ public class FileParserTest {
      * Test of getLineNumber method, of class FileParser.
      */
     @Test
+    @Ignore
     public void testGetLineNumber() {
         System.out.println("getLineNumber");
         FileParser instance = new FileParser(new File("D:/!!!_tmp/Books/test_words.txt"));

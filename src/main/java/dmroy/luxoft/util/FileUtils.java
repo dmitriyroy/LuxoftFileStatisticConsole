@@ -1,10 +1,7 @@
 package dmroy.luxoft.util;
 
-import java.awt.FileDialog;
 import java.io.File;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
 
 /**
  *
@@ -13,20 +10,15 @@ import javax.swing.WindowConstants;
 public class FileUtils {
 
     public static File getFile(String dialogName){
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setAlwaysOnTop(true);
-        frame.setEnabled(true);
 
-        FileDialog dialog = new FileDialog(frame,dialogName);
-        dialog.setFocusable(true);
-        dialog.setAlwaysOnTop(true);
-        dialog.setVisible(true);
-        String filePath = dialog.getDirectory() + dialog.getFile();
-        frame.dispose();
-//        System.out.println("filePath = " + filePath);
-//        JFileChooser dialog1 = new JFileChooser("Вася");
-//        return new File(dialog.getCurrentDirectory().getAbsolutePath());
-        return new File(filePath);
+        JFileChooser fileChooser = new JFileChooser(); 
+        fileChooser.setDialogTitle(dialogName);
+//        fileChooser.setCurrentDirectory(new File("."));  // установка директории старта по умолчанию
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);                             
+        fileChooser.showOpenDialog(null);
+        
+        File chooseCDirectory = fileChooser.getSelectedFile();
+
+        return chooseCDirectory;
     }
 }
