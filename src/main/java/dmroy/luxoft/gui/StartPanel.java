@@ -93,7 +93,6 @@ public class StartPanel extends JPanel{
         addFolder.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae) {
-//                System.out.println("Кнопка КАТАЛОГ");
                 Object[] options = {"Да","Нет"};
                 int n = JOptionPane.showOptionDialog(null,
                                                     "Обрабатывать вложенные каталоги?",
