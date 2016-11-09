@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  * @author dmitriyroy
  */
 public class FileParser implements FileParserInterface{
-    
+
     private File file;
     Set<String> globalWordSet = new HashSet<>();
     private int globalMinWordLength = Integer.MAX_VALUE;
@@ -33,57 +33,11 @@ public class FileParser implements FileParserInterface{
     public FileParser() {
         this.file = FileUtils.getFile("Выберите файл для разбора статистики");
     }
-    
+
     public FileParser(File file) {
         this.file = file;
-    }    
+    }
 
-//    @Override
-//    public File getFileToParse() {
-//        JFrame frame = new JFrame();
-//        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//        FileDialog dialog = new FileDialog(frame,"Выберите файл для разбора статистики");
-//        dialog.setVisible(true);
-//        String filePath = dialog.getDirectory() + dialog.getFile();
-//        frame.dispose();
-////        System.out.println("filePath = " + filePath);
-//        return new File(filePath);
-//    }
-  
-//    @Override
-//    public File getFileForLog() {
-//        String filePath = null; 
-//        String fileName = null;
-//        File file = null;
-//        boolean isDirectory = true;
-//        while(isDirectory){
-//            JFrame frame = new JFrame();
-//            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//            FileDialog dialog = new FileDialog(frame,"Введите название файл для вывода результата.");
-//            dialog.setVisible(true);
-//            fileName = dialog.getFile();
-//            if(fileName == null || fileName.replace(" ","").length() == 0){
-//                System.out.println("Введите название файла.");
-//            }else{
-//                filePath = dialog.getDirectory() + fileName;
-//                frame.dispose();
-//            }
-//            file = new File(filePath);
-////            if(file.exists()){
-////                System.out.println("Файл есть");
-////            }else{                
-////                System.out.println("Файла нема");
-////            }
-////            if(!file.isFile()){
-////                System.out.println("Это каталог");
-////                isDirectory = false;
-////            }else{
-////                System.out.println("Это каталог");
-////            }
-//        }        
-//        return file;
-//    }
-//    
     @Override
     public List<Line> parseFile() {
         List<Line> outList = new ArrayList<>();
@@ -126,8 +80,8 @@ public class FileParser implements FileParserInterface{
                             if(word.length() > globalMaxWordLength){
                                 globalMaxWordLength = word.length();
                                 globalMaxWord = word;
-                            }                
-                            globalWordSet.add(word);   
+                            }
+                            globalWordSet.add(word);
                             // STOP: Global-block
 
                         }
@@ -150,41 +104,10 @@ public class FileParser implements FileParserInterface{
                     line.setAllWordsLength(wordsLength);
                     line.setWordsCount(wordSet.size());
                     outList.add(line);
-                    
-//                    System.out.println("line = " + line);
 
-    //                System.out.println(str);
-    //                System.out.println(jsonStr);
-    //                os.write(jsonStr.getBytes("UTF-8"));
-    //                os.write(jsonStr.getBytes("ASCII"));
                 }
             }
-//            System.out.println("\n "
-//                    + "------------------------------------------------"
-//                    + "\nGlobal_statistic:");
-//            System.out.println("rows = " + rowNumber 
-//                            + "; globalWordsCount = " + globalWordSet.size()
-//                            + "; globalMinWord = " + globalMinWord
-//                            + "; globalMinWordLength = " + globalMinWordLength
-//                            + "; globalMaxWord = " + globalMaxWord
-//                            + "; globalMaxWordLength = " + globalMaxWordLength);
-//            System.out.println("------------------------------------------------");
-//            System.out.println("globalWordSet.contains(\"братишка,\") = " + globalWordSet.contains("братишка,"));
-//            for(String s:globalWordSet){
-//                System.out.println("s = " + s);
-//            }
 
-//            BufferedWriter w = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileJSON)/*, "UTF-8"*/));
-//            while ((line = reader.readLine()) != null) {
-//                String str = line.replaceAll("\\\\", "\\\\\\\\").replaceAll("\"", "\\\\\""); //.replaceAll(" ", "");
-////                System.out.println(str);
-//                String jsonStr = getJsonLine(fieldMap, rowArray, str, dataDelimeter);
-////                System.out.println(jsonStr);
-//                w.write(jsonStr);
-//                w.flush();
-//                jsonRowCount++;
-//            }
-//            w.close();
         } catch (IOException e) {
             // log error
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, e);
@@ -238,7 +161,7 @@ public class FileParser implements FileParserInterface{
 
     public void setLineNumber(int lineNumber) {
         this.lineNumber = lineNumber;
-    } 
-    
-    
+    }
+
+
 }

@@ -21,7 +21,7 @@ import org.springframework.dao.DataAccessException;
  */
 @Repository("fileStatisticDao")
 public class FileStatisticDao implements FileStatisticDaoInterface{
-    
+
     private static JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -30,8 +30,8 @@ public class FileStatisticDao implements FileStatisticDaoInterface{
     }
 
     public FileStatisticDao() {
-    }  
-    
+    }
+
     @Override
     public void writeIntoFile(List<Line> lineList) {
         writeIntoFile(lineList, FileUtils.getFile("Введите название файл для вывода результата."));
@@ -67,7 +67,7 @@ public class FileStatisticDao implements FileStatisticDaoInterface{
         String fileName = null;
         if(lineList.size() > 0){
             fileName = lineList.get(0).getFileName();
-            jdbcTemplate.update("DELETE file_statistic FROM file_statistic WHERE FILE_NAME = ? ", 
+            jdbcTemplate.update("DELETE file_statistic FROM file_statistic WHERE FILE_NAME = ? ",
                                 new Object[] { fileName},
                                 new int[]{Types.VARCHAR});
         }
@@ -92,17 +92,17 @@ public class FileStatisticDao implements FileStatisticDaoInterface{
                                    line.getAverageWordLength(), line.getAllWordsLength(), line.getWordsCount()},
                                    new int[]{Types.BIGINT, Types.VARCHAR, Types.INTEGER, Types.VARCHAR,
                                              Types.VARCHAR, Types.INTEGER, Types.INTEGER,
-                                             Types.INTEGER, Types.BIGINT, Types.INTEGER});  
+                                             Types.INTEGER, Types.BIGINT, Types.INTEGER});
 //                Logger.getLogger(FileStatisticDao.class.getName()).log(Level.INFO, "Файл {0}, трока № {1} добавлена в базу данных.", new Object[]{line.getFileName(), line.getLineNumber()});
 //                System.out.println("Файл " + line.getFileName() + ", строка № " + line.getLineNumber() + " добавлена в базу данных.");
             }catch(DataAccessException e){
                 Logger.getLogger(FileStatisticDao.class.getName()).log(Level.WARNING, "Ошибка добавления строки № {0} файла {1}.", new Object[]{line.getLineNumber(), line.getFileName()} );
                 System.out.println("Ошибка добавления строки № " + line.getLineNumber() + " файла " + line.getFileName() + " в базу данных.");
-            }                   
+            }
         }
         Logger.getLogger(FileStatisticDao.class.getName()).log(Level.INFO, "В базу данных добавлена информация по файлу {0}, вставлено {1} строк.", new Object[]{fileName, lineList.size()});
     }
-    
-    
-    
+
+
+
 }
