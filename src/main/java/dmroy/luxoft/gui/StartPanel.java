@@ -136,7 +136,7 @@ public class StartPanel extends JPanel{
                                 try {
                                     // Сделаем паузу, иначе получается, что у файлов одинаковое время создания
                                     // а это время в ключе в базе
-                                    Thread.sleep(10L);
+                                    Thread.sleep(100L);
                                 } catch (InterruptedException ex) {
                                     Logger.getLogger(StartPanel.class.getName()).log(Level.SEVERE, null, ex);
                                 }
@@ -174,7 +174,7 @@ public class StartPanel extends JPanel{
                                 try {
                                     // Сделаем паузу, иначе получается, что у файлов одинаковое время создания
                                     // а это время в ключе в базе
-                                    Thread.sleep(10L);
+                                    Thread.sleep(100L);
                                 } catch (InterruptedException ex) {
                                     Logger.getLogger(StartPanel.class.getName()).log(Level.SEVERE, null, ex);
                                 }
