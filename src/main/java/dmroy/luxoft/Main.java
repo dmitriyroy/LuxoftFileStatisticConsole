@@ -17,7 +17,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class Main {
 
-//    public static FileStatisticDao fileStatisticDao;
     /**
      * @param args the command line arguments
      */
