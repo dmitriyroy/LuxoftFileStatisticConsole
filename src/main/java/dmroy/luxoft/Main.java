@@ -9,6 +9,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.text.BadLocationException;
 import static org.springframework.context.i18n.LocaleContextHolder.setLocale;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 /**
@@ -25,8 +26,9 @@ public class Main {
 //        String fileToWork = "D:/!!!_tmp/Books/Кирпичи.txt";
 //        String fileToWork = "D:/!!!_tmp/Books/eroshort.txt";
 //        String fileToWorkResult = "D:/!!!_tmp/Books/Кирпичи_result.txt";
-        String path = Main.class.getResource("../../beans.xml").toString().substring(6);
-        new FileSystemXmlApplicationContext(path);
+//        String path = Main.class.getResource("../../beans.xml").toString().substring(6);
+//        new FileSystemXmlApplicationContext(path);
+        new ClassPathXmlApplicationContext("beans.xml");
 //        ApplicationContext context = new FileSystemXmlApplicationContext(path);
 //        BeanFactory factory = (BeanFactory) context;
 //        fileStatisticDao = (FileStatisticDao) factory.getBean("fileStatisticDao");
