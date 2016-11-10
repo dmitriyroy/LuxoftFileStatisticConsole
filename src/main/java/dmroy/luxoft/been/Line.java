@@ -116,10 +116,7 @@ public class Line {
             return false;
         }
         final Line other = (Line) obj;
-        if (this.fileId != other.fileId) {
-            return false;
-        }
-        return true;
+        return this.fileId == other.fileId;
     }
 
     @Override
