@@ -17,22 +17,22 @@ import static org.junit.Assert.*;
  * @author dmitriyroy
  */
 public class MainTest {
-    
+
     public MainTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -44,7 +44,7 @@ public class MainTest {
     public void testMain() {
         System.out.println("main");
         String[] args = new String[2];
-        String fileToWork = "D:/!!!_tmp/Books/test_words.txt";  
+        String fileToWork = "D:/!!!_tmp/Books/test_words.txt";
         String fileToWorkResult = "D:/!!!_tmp/Books/test_words_result.txt";
         args[0] = fileToWork;
         args[1] = fileToWorkResult;
@@ -52,5 +52,5 @@ public class MainTest {
         // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
     }
-    
+
 }

@@ -1,21 +1,13 @@
 package dmroy.luxoft;
 
-import dmroy.luxoft.dao.FileStatisticDao;
-import dmroy.luxoft.been.Line;
 import dmroy.luxoft.gui.MainFrame;
-import dmroy.luxoft.service.FileParser;
-import java.io.File;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.text.BadLocationException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.context.ApplicationContext;
 import static org.springframework.context.i18n.LocaleContextHolder.setLocale;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 

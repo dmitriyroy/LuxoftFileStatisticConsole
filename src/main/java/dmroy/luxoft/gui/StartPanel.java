@@ -1,7 +1,7 @@
 package dmroy.luxoft.gui;
 
 import dmroy.luxoft.been.Line;
-import dmroy.luxoft.dao.FileStatisticDao;
+import dmroy.luxoft.Dao.FileStatisticDao;
 import dmroy.luxoft.service.FileParser;
 import java.awt.*;
 import java.awt.event.ActionEvent;
